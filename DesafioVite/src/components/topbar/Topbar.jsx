@@ -13,7 +13,7 @@ return(
         <div className="topbarcenter">
             <div className='searchbar'>
                <Search className="searchIcon"/>
-               <input placeholder='search for a friend,post or video' className="searchinput"/> 
+               <input placeholder='Search...' className="searchinput"/> 
             </div>
         </div>
         <div className="topbarRight">
@@ -23,18 +23,7 @@ return(
 
             </div>
             <div className="topbarIcons">
-                <div className="topbarIconItem">
-                   <Person3/>
-                   <span className="topbarIconBadge">1</span> 
-                </div>
-                <div className="topbarIconItem">
-                <Chat/>
-                <span className="topbarIconBadge">2</span> 
-                </div>
-                <div className="topbarIconItem">
-                <Notifications/>
-                <span className="topbarIconBadge">3</span>
-                </div>
+               
             </div>
 
             <img src="/assets/5.2 Isabel Cortes.jpg" alt="" className="topbarImg" />

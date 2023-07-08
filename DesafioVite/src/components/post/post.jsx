@@ -5,7 +5,8 @@ import {MoreVert} from "@mui/icons-material"
 import {useState,useEffect} from 'react'
 
 export default function Post({posts}){
-    console.log(posts);
+    const [like,setLike]=useState(posts.likes);
+    const [isLiked,setIsLiked]=useState(false);
     const getMytoken = localStorage.getItem("token");
     const baseURL = "http://localhost:8800";
     const[user,setUser]=useState([])
@@ -19,33 +20,57 @@ export default function Post({posts}){
             res=>setUser(res.data),
             );
         
-    },[])
-   
+    },[posts.userId])
+
+    Array.isArray(user)
+    
+    const getProfilePicture=()=>{
+        for(let i=0; i<user.length; i++){
+            if(posts.userId===user[i].id){
+                   return user[i].profilePicture; 
+            }
+        }
+    }
+
+    const getName=()=>{
+        for(let i=0; i<user.length; i++){
+            if(posts.userId===user[i].id){
+                   return user[i].username; 
+            }
+        }
+    }
+
+    const likeHandler =()=>{
+        setLike(isLiked ? like-1:like+1)
+        setIsLiked(!isLiked)
+    }
+
 return(
         <div className='post'>
            <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className='postProfileImage' src={user.profilePicture} alt="" />
+                    <img className='postProfileImage' src={getProfilePicture()} alt="" />
                     <span className='postUserName'>
-                    {name}
+                    {getName()}
                     </span>
                     <span className='postDate'>{posts.createdAt}</span>
                 </div>
                 <div className="postTopRight">
-                <span className="postText">{posts.title}</span>
                     <MoreVert/>
                 </div>
             </div>
+            <span className="postText"> {posts.title}</span>
             <div className="postCenter">
+            
                 <span className="postText">{posts?.desc}</span>
                 <img className='postImg'  alt="" />
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
-                    <img className='likeIcon' src="/assets/emoticons/like.png" alt="" />
-                    <img className='likeIcon' src="/assets/emoticons/megusta.png"  alt="" />
-                    <span className="postLikeCounter"></span>
+                    <img className='likeIcon' src="src/assets/like.png"  onClick={likeHandler} alt="" />
+                    <img className='likeIcon' src="src/assets/megusta.png"  onClick={likeHandler} alt="" />
+                    <span className="postLikeCounter">{like}</span>
                 </div>
                 <div className="postBottomRight"></div>
                 <span className="postCommentText"> comments</span>

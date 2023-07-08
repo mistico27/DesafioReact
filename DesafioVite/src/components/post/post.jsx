@@ -1,61 +1,54 @@
 import React from 'react'
 import './post.css'
 import {MoreVert} from "@mui/icons-material"
-import {Users} from '../../dummyData'
-import {useState} from 'react'
 
-export default function Post({post}){
-    const [like,setLike]=useState(post.like);
-    const [isLiked,setIsLiked]=useState(false);
+import {useState,useEffect} from 'react'
 
-    const likeHandler =()=>{
-        setLike(isLiked ? like-1:like+1)
-        setIsLiked(!isLiked)
-    }
-    const getName=()=>{
-        for(let i=0; i<Users.length; i++){
-            if(post.userId===Users[i].id){
-                   return Users[i].username; 
-            }
-        }
-    }
-    
-    ///get profilePhoto
-    const getProfilePicture=()=>{
-        for(let i=0; i<Users.length; i++){
-            if(post.userId===Users[i].id){
-                   return Users[i].profilePicture; 
-            }
-        }
-    }
-
+export default function Post({posts}){
+    console.log(posts);
+    const getMytoken = localStorage.getItem("token");
+    const baseURL = "http://localhost:8800";
+    const[user,setUser]=useState([])
+    useEffect(()=>{
+        fetch(`${baseURL}/users`,{
+            method: "GET",
+            headers: { "Content-Type": "application/json", "Authorization":`Bearer ${getMytoken}` },
+        })
+        .then(res=>res.json())
+        .then(
+            res=>setUser(res.data),
+            );
+        
+    },[])
+   
 return(
         <div className='post'>
            <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className='postProfileImage' src={getProfilePicture()} alt="" />
+                    <img className='postProfileImage' src={user.profilePicture} alt="" />
                     <span className='postUserName'>
-                    {getName()}
+                    {name}
                     </span>
-                    <span className='postDate'>{post.date}</span>
+                    <span className='postDate'>{posts.createdAt}</span>
                 </div>
                 <div className="postTopRight">
+                <span className="postText">{posts.title}</span>
                     <MoreVert/>
                 </div>
             </div>
             <div className="postCenter">
-                <span className="postText">{post?.desc}</span>
-                <img className='postImg' src={post.photo} alt="" />
+                <span className="postText">{posts?.desc}</span>
+                <img className='postImg'  alt="" />
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
-                    <img className='likeIcon' src="/assets/emoticons/like.png" onClick={likeHandler} alt="" />
-                    <img className='likeIcon' src="/assets/emoticons/megusta.png" onClick={likeHandler}  alt="" />
-                    <span className="postLikeCounter">{like} </span>
+                    <img className='likeIcon' src="/assets/emoticons/like.png" alt="" />
+                    <img className='likeIcon' src="/assets/emoticons/megusta.png"  alt="" />
+                    <span className="postLikeCounter"></span>
                 </div>
                 <div className="postBottomRight"></div>
-                <span className="postCommentText">{post.comment} comments</span>
+                <span className="postCommentText"> comments</span>
             </div>
            </div>
         </div>

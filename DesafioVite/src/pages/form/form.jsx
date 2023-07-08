@@ -1,7 +1,37 @@
 import React from 'react'
 import "./form.css"
+import {useForm} from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Form(){
+
+    const baseURL = "http://localhost:8800";
+    const navigate = useNavigate();
+    const getMytoken = localStorage.getItem("token");
+    const {handleSubmit,register,formState:{errors}} =useForm();
+
+    const sendForm=(data)=>{
+        fetch(`${baseURL}/posts`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Authorization":`Bearer ${getMytoken}` },
+            body: JSON.stringify({
+                autor:data.autor,
+                title:data.title,
+                desc:data.desc,
+                img:data.img
+            }),
+          }).then((response) => response.json())
+          .then((response) => {
+            console.log("Post Creado exitosamente ", response);
+            navigate("/home")
+          }).catch(() => {
+            alert("fallo el metodo Fetch");
+          });
+    
+    
+    }
+
     return(
         <>
        <div className="container-fluid">
@@ -39,29 +69,38 @@ export default function Form(){
                         
                             <div className="row">
                         <div className="col-12 col-md-5">
-                            <form id="Postcard-form" action="" className="bg-dark text-white border rounded p-3 mb-3">
+                            <form onSubmit={handleSubmit(sendForm)} className="bg-dark text-white border rounded p-3 mb-3">
                                 <div className="form-group mb-3">
                                     <label htmlFor="">autor</label>
-                                    <input name="autor" id="autor" type="text" className="form-control" placeholder="autor"/>
+                                    <input name="autor" required id="autor" type="text" className="form-control" 
+                                    {...register('autor',{required:{value:true, message:"correo requerido"}})}
+                                     placeholder="autor"/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="">titulo</label>
-                                    <input name="titulo" id="titulo" type="text" className="form-control" placeholder="titulo"/>
+                                    <input name="titulo" id="titulo" type="text" className="form-control" 
+                                    {...register('title',{required:{value:true, message:"correo requerido"}})}
+                                    placeholder="titulo"/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="">TAGS</label>
-                                    <input name="tags" id="tags" type="text" className="form-control" placeholder="pon tu Tag"/>
+                                    <input name="tags" id="tags" type="text" className="form-control" 
+                                    placeholder="pon tu Tag"/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="">Foto</label>
-                                    <input name="picture" id="picture" type="text" className="form-control"/>
+                                    <input name="picture" id="picture" type="text" className="form-control"
+                                    {...register('img',{required:{value:true, message:"correo requerido"}})}
+                                    />
                                 </div>
                                 <div className="form-group mb-3">
                                     <label htmlFor="">PostBody</label> 
-                                <input type="text" className="form-control" id="postBody" name="postBody" placeholder="postbody"/>
+                                <input type="text" className="form-control" id="postBody" name="postBody" 
+                                {...register('desc',{required:{value:true, message:"correo requerido"}})}
+                                placeholder="postbody"/>
                                 </div>
                                 <div className='haciendoFlex'>
-                                <button className='save-card'>save card</button>
+                                <button className='save-card'  type="submit" >save card</button>
                                 <button  className="return-Post" onClick={e =>{
                                                    e.preventDefault();
                                                    window.location.replace('/Home');

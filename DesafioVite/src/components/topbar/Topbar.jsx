@@ -8,6 +8,9 @@ export default function Topbar(){
     const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleShowII = () => setShow(false);
+
+  
+
 return(
     <div className="topbarcontainer">
         <div className="topbarLeft">
@@ -27,7 +30,9 @@ return(
                    
             </div>
             <div className="topbarIcons">
-            <button className="createPost"> Create Post </button>
+            <button className="createPost" onClick={e =>{
+                window.location.replace('/form');
+            }}> Create Post </button>
 
                 <div className="topbarIconItem">
                 <Notifications/>

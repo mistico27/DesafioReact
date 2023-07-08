@@ -27,8 +27,8 @@ export default function Form(){
             <div className="container pt-5">
             <div className="row">  
                         
-            <div classname="container">
-            <div classname="col-lg-12 col-md-9 col-lg-6">
+            <div className="container">
+            <div className="col-lg-12 col-md-9 col-lg-6">
                 <div className="contaier-info">
                     <div className="row">
                         <div className="col-2"></div>
@@ -41,28 +41,31 @@ export default function Form(){
                         <div className="col-12 col-md-5">
                             <form id="Postcard-form" action="" className="bg-dark text-white border rounded p-3 mb-3">
                                 <div className="form-group mb-3">
-                                    <label for="">autor</label>
+                                    <label htmlFor="">autor</label>
                                     <input name="autor" id="autor" type="text" className="form-control" placeholder="autor"/>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label for="">titulo</label>
+                                    <label htmlFor="">titulo</label>
                                     <input name="titulo" id="titulo" type="text" className="form-control" placeholder="titulo"/>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label for="">TAGS</label>
+                                    <label htmlFor="">TAGS</label>
                                     <input name="tags" id="tags" type="text" className="form-control" placeholder="pon tu Tag"/>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label for="">Foto</label>
+                                    <label htmlFor="">Foto</label>
                                     <input name="picture" id="picture" type="text" className="form-control"/>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label for="">PostBody</label> 
+                                    <label htmlFor="">PostBody</label> 
                                 <input type="text" className="form-control" id="postBody" name="postBody" placeholder="postbody"/>
                                 </div>
                                 <div className='haciendoFlex'>
                                 <button className='save-card'>save card</button>
-                                <button  className="return-Post">return</button>
+                                <button  className="return-Post" onClick={e =>{
+                                                   e.preventDefault();
+                                                   window.location.replace('/Home');
+                                    }}>return</button>
                                 </div>
                                 </form>
                         </div>

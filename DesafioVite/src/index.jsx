@@ -1,10 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from 'react'
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import Home from './pages/home/home';
+import Login from './pages/login/login';
+import Form from './pages/form/form';
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    errorElement:<p>Bad request of the user</p>
+   
+  },
+  {
+    path: "/home",
+    element:<Home />,
+    errorElement:<p>Bad request of the user</p>
+  },
+  {
+    path: "/form",
+    element:<Form />,
+    errorElement:<p>Bad request of the user</p>
+  },
+  
+]);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+    <RouterProvider router={router}/>
+  </React.StrictMode>,
+)

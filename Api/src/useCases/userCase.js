@@ -23,7 +23,6 @@ const createRegister =async(data)=>{
     let passwordEncryptada = await bcrypt.hash(data.password, saltRounds);
      data.password=passwordEncryptada;
      const user = await User.create(data);
-     console.log("hey soyt el nuevo registro user",user);
      return user;
  }
 
@@ -36,9 +35,9 @@ const createRegister =async(data)=>{
   if(!isValidPassword){
       throw createError(400, "Invalid data");
   }
-  ///este viene de la librearia jwt.lib.js
+  ///este viene de la librearia lib.js
   const token = jwt.sign({user: userFound.email, id:userFound._id })
-  console.log(token);
+  
   return token;
 }
 

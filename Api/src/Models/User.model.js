@@ -6,6 +6,7 @@ const UsersChema = new mongoose.Schema({
         minlength: 3,
         maxlength: 20,
         required: true,
+        unique:true,
     },
     age: {
         type: Number,

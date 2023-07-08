@@ -2,6 +2,7 @@
     flex: 3;
     height: calc(100vh - 50px);
     overflow-y: scroll;
+    background-color: rgb(149 146 146 / 12%);
     position: sticky;
     top: 50px;
     position: sticky;
@@ -32,6 +33,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    padding-top: 10px;
   }
   
   .sidebarIcon {
@@ -54,4 +56,107 @@
     padding: 0;
     margin: 0;
     list-style: none;
+  }
+
+  .icono-home{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+  
+
+  .social-network{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    align-content: center;
+    flex-direction: row;
+  }
+
+  .tags-aside {
+    max-height: 180px;
+  overflow: auto;
+  padding-left: 1px;
+  padding-top: 1px;
+  padding-right: 0px;
+  padding-bottom: 40px;
+  }
+
+  .tags-aside .tag-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    text-decoration:none;
+
+  }
+  
+  .tags-aside :hover {
+    border-radius: 7px;
+    background: #e4e3f3;
+    color: blue;
+    text-decoration: underline;
+  }
+
+  .encabezado-navegacion-3 {
+    /*  border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 0px;
+    padding-top: 7px;
+  }
+
+
+  .nav-info-4 {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 2%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10PX;
+    margin-left: 10PX;
+  }
+
+
+  .header-4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 0px;
+  }
+  
+  .nav-image-info-4 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .nav-image-info-4 h3, p {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .header-info {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  
+  .boton-info {
+    background-color: #ffffff;
+    border: none;
+    margin-left: 120px;
+    /* padding-left: 10px; */
+    padding: 10px;
+  }
+
+
+  .nav-info-5 {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 3%;
+    padding: 10px 20px 10px 20px;
+    margin: 10px;
   }

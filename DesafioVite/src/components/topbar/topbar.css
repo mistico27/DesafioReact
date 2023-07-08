@@ -1,7 +1,7 @@
 .topbarcontainer{
-    height:50px;
+    height:60px;
     width:100%;
-    background-color: rgb(149, 146, 146);
+    background-color: white;
     display:flex;
     align-items: center;
     position:sticky;
@@ -51,6 +51,7 @@
     margin-right: 15px;
     cursor:pointer;
     position: relative;
+    color:black;
 }
 
 .topbarIconBadge{
@@ -71,13 +72,14 @@
 .searchbar{
     width:70%;
     height:30px;
-    background-color: aliceblue;
+    background-color: white;
     border-radius: 8px;
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
     position:relative;
-    left:-200px;
+    left:-220px;
+    border: 2px solid black;
 }
 
 .searchIcon{
@@ -86,10 +88,17 @@
 
 }
 
+.site-logo__img{
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 100%;
+    width: 50px;
+}
+
 .searchinput{
     border:none;
     width:90%;
-    background-color: aliceblue;
+    background-color: transparent;
 
 }
 .searchinput:focus{
@@ -105,6 +114,38 @@
     cursor:pointer;
 }
 
-.autor{
-    font-size: 35%;
+
+.createPost{
+    width: 140px;
+    background:  white;
+    color:#0b70e1;
+    border: 1px solid #0b70e1;
+    outline: 0;
+    padding:6px;
+    border-radius: 10px;
+    margin-top:0px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 300ms;
+} 
+
+.createPost:hover{
+    background-color: #0b70e1;
+    color: aliceblue;
 }
+
+
+.dropdown {
+    position: relative;
+  }
+ 
+ 
+
+  .paddingPage{
+    width: auto;
+    background-color: aliceblue;
+    height: 55px;
+    padding: 0px;
+  }

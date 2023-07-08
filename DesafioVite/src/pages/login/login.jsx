@@ -1,6 +1,40 @@
 import React from 'react'
 import './login.css'
+import {useForm} from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 export default function Login(){
+    console.log("hey como andan Estamos en el archivo de login");
+    const baseURL = "http://localhost:8800";
+    const navigate = useNavigate();
+    const {handleSubmit,register,formState:{errors}} =useForm();
+
+
+    const goingToHome=(data)=>{
+        console.log(data);
+        fetch(`${baseURL}/auth`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: data.email,
+                password: data.password,
+            }),
+          }).then((response) => response.json())
+          .then((response) => {
+            console.log("response Bienvenido ", response);
+            if(response?.token){
+              localStorage.setItem('token',response?.token)
+              navigate("/home")
+          }else{
+              alert("aun no puedes entrar, identificate bro...");
+          }
+          })
+          .catch(() => {
+            alert("fallo el fetch :c");
+          });
+          
+          }
+          
+
     return(
         <div className="container-fluid">
             <nav className="navbar navbar-expand-lg bg-body-tertiary"> 
@@ -25,8 +59,8 @@ export default function Login(){
             <div className="container pt-5">
             <div className="row">  
                         
-        <div class="container">
-            <div class="col-lg-12 col-md-9 col-lg-6">
+        <div className="container">
+            <div className="col-lg-12 col-md-9 col-lg-6">
                 <div className="contaier-info">
                     <div className="row">
                         <div className="col-2"></div>
@@ -37,7 +71,7 @@ export default function Login(){
                             </div>
                         
                             <div>
-                                <div class="d-grid gap-2">
+                                <div className="d-grid gap-2">
                                     <button className="btn btn-dark" type="button"><i className="fa-brands fa-apple"></i>  Continue with Apple</button>
                                     <button className="btn btn-greenAqua" type="button"><i className="fa-sharp fa-solid fa-recycle"></i>  Continue with Forem</button>
                                     <button className="btn btn-gray2" type="button"><i className="fa-brands fa-github"></i>  Continue with GitHub</button>
@@ -45,7 +79,7 @@ export default function Login(){
                                 </div>
                             </div>
                             
-                            <div classame="lineGray">
+                            <div className="lineGray">
                                 <p className="lineGray"> Have a password? Continue with your email addres </p>
                             </div>
                         </div>
@@ -57,29 +91,32 @@ export default function Login(){
                 <div className="row">
                     <div className="col-2"></div>
                     <div className="col-8"> 
-                    <form action="" method="" id="formulario-form" className="row g-3 needs-validation" novalidate>
+                    <form onSubmit={handleSubmit(goingToHome)} className="row g-3 needs-validation" >
                     <div className="row mb-3">
-                                <div className="form-group">
-                                    <label for="InputEmail" className="col-sm-2 "><strong>Email </strong></label>
-                                    <input type="email" id="InputEmail" className="form-control form-control-sm col-sm-10" required />
-                                </div>
-                                <div className="form-group">
-                                    <label for="InputPassword" className="col-sm-2 "><strong> Password</strong></label>
-                                    <input type="password" id="InputPassword" className="form-control form-control-sm col-sm-10" required/>
-                                </div>
+                         <div className="form-group">
+                         <label htmlFor="InputEmail" className="col-sm-2 "><strong>Email </strong></label>
+                                <input  required
+                                    className="form-control form-control-sm col-sm-10" {...register('email',{required:{value:true, message:"correo requerido"}})} />
+                          </div>       
+                          <div className="form-group">
+                          <label htmlFor="InputPassword" className="col-sm-2 "><strong> Password</strong></label>
+                                <input required minLength={"4"} type="Password"
+                                     className="form-control form-control-sm col-sm-10" {...register('password',{required:{value:true, message:"password requerido"}})} />
+                           </div>
                             </div>
+                            
                             <div className="row mb-3">
                                 <div className="col-sm-10">
                                     <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id="gridCheck1" required/>
-                                    <label className="form-check-label" for="gridCheck1">
+                                    <input className="form-check-input" type="checkbox" id="gridCheck1"/>
+                                    <label className="form-check-label" htmlFor="gridCheck1">
                                         Remember me
                                     </label>
                                     </div>
                                 </div>
                             </div>  
                             <div className="d-grid gap-2">
-                                <button type="button" id="continueButton" className="btn btn-purple2" > Continue </button>
+                                <button className='btn btn-purple2'  type="submit" >Continue</button>
                             </div>
                             <div className="textCenter"> <a className='textCenter' href="#" target="_blank"> I forgot my password </a> </div>
                             <div id="alertSesion"> </div>

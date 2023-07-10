@@ -4,6 +4,7 @@ import {MoreVert} from "@mui/icons-material"
 
 import {useState,useEffect} from 'react'
 
+
 export default function Post({posts}){
     const [like,setLike]=useState(posts.likes);
     const [isLiked,setIsLiked]=useState(false);
@@ -44,6 +45,28 @@ export default function Post({posts}){
         setLike(isLiked ? like-1:like+1)
         setIsLiked(!isLiked)
     }
+    
+    const goToEdit=()=>{
+        window.location.replace(`/edit?postCardId=${posts._id}`);
+        localStorage.setItem( "postCardId", JSON. stringify(posts._id));
+    }
+
+
+    const Removefunction = () => {
+        let mypostId= posts._id;
+        console.log(mypostId)
+        if (window.confirm('Do you want to remove?')) {
+            fetch(`${baseURL}/posts/${mypostId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json", "Authorization":`Bearer ${getMytoken}` },
+            }).then((res) => {
+                alert('Removed successfully.')
+                window.location.reload();
+            }).catch((err) => {
+                console.log(err.message)
+            })
+        }
+    }
 
 return(
         <div className='post'>
@@ -58,6 +81,8 @@ return(
                 </div>
                 <div className="postTopRight">
                     <MoreVert/>
+                    <button className='Edit card' onClick={goToEdit}>Edit Card</button>
+                    <button className='Delete card' onClick={Removefunction}>Delete Card</button>
                 </div>
             </div>
             <span className="postText"> {posts.title}</span>

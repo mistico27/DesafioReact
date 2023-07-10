@@ -2,6 +2,7 @@ import React ,{useState,useEffect}from 'react'
 import './feed.css'
 import Share from '../share/share'
 import Post from '../post/post'
+import Topbar from '../topbar/Topbar'
 
 export default function Feed(){
 console.log("Aqui estoy en el index desde feed");

@@ -1,4 +1,4 @@
-import  React,{useState} from 'react';
+import  React,{useState,useEffect} from 'react';
 import "./topbar.css"
 import {Search,Notifications} from "@mui/icons-material"
 import { Modal, Button, Form } from "react-bootstrap";
@@ -9,7 +9,37 @@ export default function Topbar(){
   const handleShow = () => setShow(true);
   const handleShowII = () => setShow(false);
 
-  
+  const [search, setSearch] = useState ('');
+
+  const getMytoken = localStorage.getItem("token");
+
+  const baseURL = "http://localhost:8800";
+  const[posts,setPost]=useState([])
+  useEffect(()=>{
+      fetch(`${baseURL}/posts`,{
+          method: "GET",
+          headers: { "Content-Type": "application/json", "Authorization":`Bearer ${getMytoken}` },
+      })
+      .then(res=>res.json())
+      .then(
+          res=>setPost(res.data)
+          );
+      
+  },[])
+
+
+  const handleChange = (event) => {
+
+    setSearch (event.target.value);
+    let postEncontrados=posts.filter(post=>{
+      return post.title.toLowerCase().includes(search.toLowerCase());
+    });
+    if(search.length<=1|| search.length<=0){
+      postEncontrados=JSON.parse(posts);
+    }
+    console.log(postEncontrados);
+    setPost(postEncontrados);
+    };
 
 return(
     <div className="topbarcontainer">
@@ -21,7 +51,7 @@ return(
         <div className="topbarcenter">
             <div className='searchbar'>
                <Search className="searchIcon"/>
-               <input placeholder='Search...' className="searchinput"/> 
+               <input type="text" value = {search} onChange = {handleChange} placeholder='Search...' className="searchinput"/> 
             </div>
         </div>
         <div className="topbarRight">

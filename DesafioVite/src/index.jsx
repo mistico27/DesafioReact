@@ -8,7 +8,7 @@ import {
 import Home from './pages/home/home';
 import Login from './pages/login/login';
 import Form from './pages/form/form';
-
+import Edit from './pages/Edit/Edit';
 
 
 const router = createBrowserRouter([
@@ -28,6 +28,12 @@ const router = createBrowserRouter([
     element:<Form />,
     errorElement:<p>Bad request of the user</p>
   },
+  {
+    path: "/edit",
+    element:<Edit />,
+    errorElement:<p>Bad request of the user</p>
+  },
+
   
 ]);
 

@@ -4,12 +4,10 @@ import {Search,Notifications} from "@mui/icons-material"
 import { Modal, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
-export default function Topbar(){
+export default function Topbar({search,setSearch}){
     const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleShowII = () => setShow(false);
-
-  const [search, setSearch] = useState ('');
 
   const getMytoken = localStorage.getItem("token");
 
@@ -29,16 +27,7 @@ export default function Topbar(){
 
 
   const handleChange = (event) => {
-
-    setSearch (event.target.value);
-    let postEncontrados=posts.filter(post=>{
-      return post.title.toLowerCase().includes(search.toLowerCase());
-    });
-    if(search.length<=1|| search.length<=0){
-      postEncontrados=JSON.parse(posts);
-    }
-    console.log(postEncontrados);
-    setPost(postEncontrados);
+    setSearch(event.target.value);
     };
 
 return(

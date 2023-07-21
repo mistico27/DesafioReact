@@ -6,13 +6,14 @@ const appServer =require("./src/server")
  * 2. Prender servidor
  */
 const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_SCHEMA} = process.env
+const port =8800;
 // Vamos a ocultar
 // Variables de entorno
 const databaseURL =`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_SCHEMA}`;
 mongoose.connect(databaseURL)
 .then(() => {
   console.log("estamos conectados a mongo!!!!");
-  appServer.listen(8800,()=>{
+  appServer.listen(port,()=>{
     console.log("BackEnd server is ready and running   !!!!");
   })
 })
